@@ -390,6 +390,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8553032e4791146a500addc620b29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLocalPlayer: 0
+  isAttack: 0
+  attackTime: 0
 --- !u!1 &2481418630027145925
 GameObject:
   m_ObjectHideFlags: 0

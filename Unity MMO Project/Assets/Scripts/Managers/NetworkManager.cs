@@ -117,9 +117,9 @@ public class NetworkManager : MonoBehaviour
 	{
 		Dictionary<string,string> data = new Dictionary<string,string> ();
 
-		data ["position"] = _newPos.x + "," + _newPos.y + "," + _newPos.z;
+		data ["position"] = _newPos.x + ":" + _newPos.y + ":" + _newPos.z;
 
-		data ["rotation"] = _newRot.x + "," + _newRot.y + "," + _newRot.z + "," + _newRot.w;
+		data ["rotation"] = _newRot.x + ":" + _newRot.y + ":" + _newRot.z + ":" + _newRot.w;
 
 		socket.Emit ("MOVE_AND_ROT",new JSONObject(data));
 
@@ -176,7 +176,7 @@ public class NetworkManager : MonoBehaviour
 	Vector3 JsonToVector3(string target ){
 
 		Vector3 newVector;
-		string[] newString = Regex.Split(target,",");
+		string[] newString = Regex.Split(target,":");
 		newVector = new Vector3( float.Parse(newString[0]), float.Parse(newString[1]),float.Parse(newString[2]));
 
 		return newVector;
@@ -186,7 +186,7 @@ public class NetworkManager : MonoBehaviour
 	Vector4 JsonToVector4(string target ){
 
 		Vector4 newVector;
-		string[] newString = Regex.Split(target,",");
+		string[] newString = Regex.Split(target,":");
 		newVector = new Vector4( float.Parse(newString[0]), float.Parse(newString[1]), float.Parse(newString[2]),float.Parse(newString[3]));
 
 		return newVector;
