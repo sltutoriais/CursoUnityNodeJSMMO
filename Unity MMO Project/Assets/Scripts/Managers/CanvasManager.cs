@@ -20,7 +20,7 @@ public class CanvasManager : MonoBehaviour {
 		// if don't exist an instance of this class
 		if (instance == null) {
 
-
+       
 			//it doesn't destroy the object, if other scene be loaded
 			DontDestroyOnLoad (this.gameObject);
 			instance = this;// define the class as a static variable

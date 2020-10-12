@@ -55,14 +55,14 @@ public class NetworkManager : MonoBehaviour
 		Debug.Log ("mensagem do servidor: "+result["message"]);
 	}
 
-	//metodo responsável por enviar um "ping" ao servidor
+	//send "ping" to server
 	public void SendPingToServer()
 	{
 		Dictionary<string,string> pack = new Dictionary<string,string> ();
 
 		pack["message"] = "ping!!!";
 
-		socket.Emit ("PING", new JSONObject (pack));//envia ao servidor nodejs
+		socket.Emit ("PING", new JSONObject (pack));//send to nodejs server
 
 	}
 
@@ -132,8 +132,8 @@ public class NetworkManager : MonoBehaviour
 		Dictionary<string,string> result = pack.data.ToDictionary ();
 
 		PlayerManager netPlayer = networkPlayers [result ["id"]];
-		Vector3 _pos = JsonToVector3 (result ["position"]);
-		Vector4 _rot = JsonToVector4 (result["rotation"]);
+		Vector3 _pos = UtilsClass.StringToVector3(result ["position"]);
+		Vector4 _rot =  UtilsClass.StringToVector4(result["rotation"]);
 
 		netPlayer.UpdatePosAndRot (_pos, new Quaternion (_rot.x, _rot.y, _rot.z, _rot.w));
 
@@ -170,26 +170,6 @@ public class NetworkManager : MonoBehaviour
 
 			networkPlayers.Remove (result["id"]);
 		}
-
-	}
-
-	Vector3 JsonToVector3(string target ){
-
-		Vector3 newVector;
-		string[] newString = Regex.Split(target,":");
-		newVector = new Vector3( float.Parse(newString[0]), float.Parse(newString[1]),float.Parse(newString[2]));
-
-		return newVector;
-
-	}
-
-	Vector4 JsonToVector4(string target ){
-
-		Vector4 newVector;
-		string[] newString = Regex.Split(target,":");
-		newVector = new Vector4( float.Parse(newString[0]), float.Parse(newString[1]), float.Parse(newString[2]),float.Parse(newString[3]));
-
-		return newVector;
 
 	}
 
